@@ -1,0 +1,15 @@
+name: Cakewars
+version: 1.0
+author: Doppelbemme
+main: de.doppelbemme.bewerbung.main.Bewerbung
+commands:
+  setup:
+  stats:
+    aliases: [statistiken]
+  setlobby:
+  start:
+  setteamspawn:
+  build:
+  forcemap:
+  setspawner:
+  setcake:
