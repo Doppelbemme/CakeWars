@@ -97,7 +97,7 @@ public class MySQLStats {
 	
 	public static void addWins(UUID uuid, int Wins) {
 		try {
-			PreparedStatement ps = (PreparedStatement) MySQL.getConnection().prepareStatement("UPDATE stats SET Cakes = ? WHERE UUID = ?");
+			PreparedStatement ps = (PreparedStatement) MySQL.getConnection().prepareStatement("UPDATE stats SET Wins = ? WHERE UUID = ?");
 			ps.setInt(1, getKills(uuid) + Wins);
 			ps.setString(2, uuid.toString());
 			ps.executeUpdate();
