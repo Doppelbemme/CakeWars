@@ -28,7 +28,7 @@ public class PlayerOnlineListener implements Listener{
 		event.setJoinMessage(null);
 		
 		if(Bewerbung.main.state == GameState.LOBBY){
-		Bukkit.broadcastMessage("§a» §7" + event.getPlayer().getName() + " §7hat die Runde betreten");
+		Bukkit.broadcastMessage("Â§aÂ» Â§7" + event.getPlayer().getName() + " Â§7hat die Runde betreten");
 		if(player.hasPermission("cakewars.setup")){
 			if(!MySQL.isConnected()){
 				Bewerbung.sendSetupMessage(player);
@@ -44,13 +44,14 @@ public class PlayerOnlineListener implements Listener{
 				Bewerbung.main.utils.setLobbyItems(player);
 				Bewerbung.main.utils.setTeamPrefix(player);
 				
+				
+			if(!MySQLStats.isUserExisting(player.getUniqueId())){
+				MySQLStats.register(player.getUniqueId(), 0, 0, 0, 0, 0);
+				Bukkit.getConsoleSender().sendMessage(Bewerbung.main.prefix + "Â§bDatensatz Â§afÃ¼r den Spieler Â§e" + player.getName() +  "Â§7(Â§e" + player.getUniqueId() + "Â§7)" + " Â§aerfolgreich erstellt!");
+				}
+				
 			}
-		}, 2);
-		
-		if(!MySQLStats.isUserExisting(player.getUniqueId())){
-			MySQLStats.register(player.getUniqueId(), 0, 0, 0, 0, 0);
-			Bukkit.getConsoleSender().sendMessage(Bewerbung.main.prefix + "§bDatensatz §afür den Spieler §e" + player.getName() +  "§7(§e" + player.getUniqueId() + "§7)" + " §aerfolgreich erstellt!");
-		}
+		}, 3);
 		
 		
 		if(OnlinePlayerAmount == 2){
@@ -75,7 +76,7 @@ public class PlayerOnlineListener implements Listener{
 	public void onPlayerQuit(PlayerQuitEvent event){
 		
 		event.setQuitMessage(null);
-		Bukkit.broadcastMessage("§c« §7" + event.getPlayer().getName() + " §7hat die Runde verlassen");
+		Bukkit.broadcastMessage("Â§cÂ« Â§7" + event.getPlayer().getName() + " Â§7hat die Runde verlassen");
 		Bewerbung.main.utils.removePlayerFromTeam(event.getPlayer());
 		Bewerbung.main.utils.setTeamPrefix(event.getPlayer());
 		
@@ -112,7 +113,7 @@ public class PlayerOnlineListener implements Listener{
 		Integer onlinePlayerAmount = Bukkit.getOnlinePlayers().size();
 		if(Bewerbung.main.state == GameState.LOBBY){
 			if(onlinePlayerAmount == 2){
-				String roundFull = "§cDiese Runde ist bereits voll!";
+				String roundFull = "Â§cDiese Runde ist bereits voll!";
 				event.disallow(null, roundFull);
 			}
 		}
@@ -130,9 +131,9 @@ public class PlayerOnlineListener implements Listener{
 		event.setCancelled(true);
 		
 		if(player.getGameMode() == GameMode.SPECTATOR){
-			player.sendMessage(Bewerbung.main.prefix + "§cRuhe auf den billigen Plätzen!");
+			player.sendMessage(Bewerbung.main.prefix + "Â§cRuhe auf den billigen PlÃ¤tzen!");
 		}else{
-		Bukkit.broadcastMessage(player.getDisplayName() + "§8: §7" + newmessage);
+		Bukkit.broadcastMessage(player.getDisplayName() + "Â§8: Â§7" + newmessage);
 		}
 	}
 	
